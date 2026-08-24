@@ -1,0 +1,94 @@
+esphome:
+  name: ld2410c-radar
+  friendly_name: ld2410c-Radar
+  name_add_mac_suffix: true
+  project:
+    name: steggy.ld2410c-radar
+    version: "1.0"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+# The ESPHome dashboard will add private API encryption during adoption.
+api:
+
+# The ESPHome dashboard will add private OTA security during adoption.
+ota:
+  - platform: esphome
+
+# No home Wi-Fi credentials or private setup password are compiled
+# into the public factory firmware.
+wifi:
+  ap:
+    ssid: "Radar Setup"
+
+captive_portal:
+
+# Allows Wi-Fi provisioning over USB.
+improv_serial:
+
+# Allows Wi-Fi provisioning over Bluetooth.
+esp32_improv:
+  authorizer: none
+
+
+dashboard_import:
+  package_import_url: github://steggy/esp32-D1mini-usb-c-40pin-LD2410c-radar/radar-factory.yaml@master
+  import_full_config: true
+
+# Five quick power cycles erase stored settings and Wi-Fi credentials.
+factory_reset:
+  resets_required: 5
+  max_delay: 10s
+
+uart:
+  id: radar_uart
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+
+ld2410:
+  uart_id: radar_uart
+
+binary_sensor:
+  - platform: ld2410
+    has_target:
+      name: Presence
+      filters:
+        - delayed_off: 2s
+
+    has_moving_target:
+      name: Moving Target
+
+    has_still_target:
+      name: Still Target
+
+sensor:
+  - platform: ld2410
+    detection_distance:
+      name: Detection Distance
+
+    moving_distance:
+      name: Moving Distance
+
+    still_distance:
+      name: Still Distance
+
+select:
+  - platform: ld2410
+    distance_resolution:
+      name: Distance Resolution
+
+button:
+  - platform: ld2410
+    restart:
+      name: Restart Radar Module
+
+    query_params:
+      name: Refresh Radar Parameters

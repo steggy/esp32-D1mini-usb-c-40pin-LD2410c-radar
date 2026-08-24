@@ -1,0 +1,28 @@
+# ESPHome generated build output
+.esphome/
+build/
+radar-README.md
+
+# Private credentials
+secrets.yaml
+.env
+.env.*
+!.env.example
+
+# Home Assistant private/local configuration
+home-assistant-private/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.backup
+*.bak
+
+# Vim temporary files
+*.swp
+*.swo
+*~
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
