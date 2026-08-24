@@ -124,6 +124,21 @@ device using the public configuration in this repository.
 
 This is the recommended Home Assistant ESPHome Device Builder method.
 
+### Factory firmware
+
+Download:
+
+- [Factory firmware](firmware/ld2410c-radar.factory.bin)
+- [SHA-256 checksum](firmware/ld2410c-radar.factory.bin.sha256)
+
+Verify the downloaded firmware from the repository root:
+
+```bash
+cd firmware
+sha256sum -c ld2410c-radar.factory.bin.sha256
+cd ..
+---
+
 ### Provision Wi-Fi
 
 1. Power the radar using USB-C.
