@@ -12,6 +12,7 @@ esp32:
     type: arduino
 
 logger:
+  level: WARN
 
 # The ESPHome dashboard will add private API encryption during adoption.
 api:
